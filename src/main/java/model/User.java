@@ -30,8 +30,18 @@ public class User {
         this.role = role;
         this.profilePic = profilePic;
     }
+    
 
-    public int getId() {
+    public User(String name, String username, String password, String email, String role) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.role = role;
+	}
+
+	public int getId() {
         return id;
     }
 

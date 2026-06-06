@@ -205,6 +205,10 @@ if (list == null && request.getParameter("searchname") == null && request.getAtt
 							<label class="form-label smallest fw-800 text-uppercase">Contact</label> 
                             <input type="number" name="phone" class="form-control rounded-3 py-2" required>
 						</div>
+						<div class="col-md-6">
+							<label class="form-label smallest fw-800 text-uppercase">Age</label> 
+                            <input type="number" name="age" class="form-control rounded-3 py-2" required>
+						</div>
 						<div class="col-md-4">
 							<label class="form-label smallest fw-800 text-uppercase">Department</label> 
                             <select name="department" class="form-select rounded-3 py-2" required>
@@ -221,6 +225,11 @@ if (list == null && request.getParameter("searchname") == null && request.getAtt
 							<label class="form-label smallest fw-800 text-uppercase">Availability</label> 
                             <input type="date" name="joiningDate" class="form-control rounded-3 py-2" required>
 						</div>
+						<div class="p-4 border-2 border-dashed rounded-4 bg-light text-center">
+                                    <i class="bi bi-cloud-arrow-up fs-2 text-primary d-block mb-2"></i>
+                                    <input type="file" name="image" class="form-control" accept="image/*" onchange="previewImage(this)">
+                                    <span class="smallest text-muted mt-2 d-block">Recommended size: 512x512px (Max 5MB)</span>
+                                </div>
 						<div class="col-12 mt-4 pt-2">
 							<button type="submit" class="btn btn-primary-custom w-100 py-3 shadow-premium">
 								Confirm Registration

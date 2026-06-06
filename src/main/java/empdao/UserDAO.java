@@ -15,7 +15,7 @@ public class UserDAO {
     public int registerUser(User user) {
         int i = 0;
         try (Connection conn = getConnection()) {
-            String sql = "INSERT INTO users (name, username, password, email, role, profile_pic) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO users (name, username, password, email, role) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getName());
             ps.setString(2, user.getUsername());
@@ -26,7 +26,7 @@ public class UserDAO {
             
             ps.setString(4, user.getEmail());
             ps.setString(5, user.getRole());
-            ps.setString(6, user.getProfilePic());
+            
             i = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
