@@ -24,22 +24,26 @@ public class add_employee extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String position = request.getParameter("position");
-		String address = request.getParameter("address");
+		String address = request.getParameter("address") != null ? request.getParameter("address") : "";
 		int age = Integer.parseInt(request.getParameter("age"));
-		String skill = request.getParameter("skill");
+		String skill = request.getParameter("skill") != null ? request.getParameter("skill") : "";
 		double salary = Double.parseDouble(request.getParameter("salary"));
 		String phone = request.getParameter("phone");
 		String department = request.getParameter("department");
 		String joiningDate = request.getParameter("joiningDate");
 
 		Part filePart = request.getPart("image");
-		String fileName = filePart.getSubmittedFileName();
+		String fileName = (filePart != null) ? filePart.getSubmittedFileName() : "";
 
-		String path = getServletContext().getRealPath("/") + "image";
-		File dir = new File(path);
-		if (!dir.exists())
-			dir.mkdirs();
-		filePart.write(path + File.separator + fileName);
+		if (fileName != null && !fileName.isEmpty()) {
+			String path = getServletContext().getRealPath("/") + "image";
+			File dir = new File(path);
+			if (!dir.exists())
+				dir.mkdirs();
+			filePart.write(path + File.separator + fileName);
+		} else {
+			fileName = "";
+		}
 
 		employee emp = new employee(name, email, address, position, age, skill, salary, phone, department, joiningDate,
 				fileName);

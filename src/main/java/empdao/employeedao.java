@@ -514,7 +514,7 @@ public class employeedao {
 				list.add(new employee(rs.getInt("id"), rs.getString("name"), rs.getString("email"),
 						rs.getString("address"), rs.getString("position"), rs.getInt("age"), rs.getString("skill"),
 						rs.getDouble("salary"), rs.getString("phone"), rs.getString("department"),
-						rs.getDate("joiningDate").toString(), rs.getString("image")));
+						rs.getDate("joiningDate") != null ? rs.getDate("joiningDate").toString() : "", rs.getString("image")));
 			}
 
 		} catch (Exception e) {
@@ -540,7 +540,7 @@ public class employeedao {
 				list.add(new employee(rs.getInt("id"), rs.getString("name"), rs.getString("email"),
 						rs.getString("address"), rs.getString("position"), rs.getInt("age"), rs.getString("skill"),
 						rs.getDouble("salary"), rs.getString("phone"), rs.getString("department"),
-						rs.getDate("joiningDate").toString(), rs.getString("image")));
+						rs.getDate("joiningDate") != null ? rs.getDate("joiningDate").toString() : "", rs.getString("image")));
 			}
 
 		} catch (Exception e) {

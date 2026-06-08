@@ -162,7 +162,7 @@ import db.DatabaseConnection;
 
 	    	 try {
 				
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM jobs WHERE application_last_date >= CURDATE()");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM jobs WHERE application_last_date >= CURRENT_DATE");
 					
 
 		    ResultSet rs = ps.executeQuery();
@@ -277,7 +277,7 @@ import db.DatabaseConnection;
 			List<jobs> list = new ArrayList<>();
 			try {
 				Connection conn = getConnection();
-				PreparedStatement ps = conn.prepareStatement("SELECT * FROM jobs WHERE application_last_date >= CURDATE() ORDER BY jobs_id DESC LIMIT ?");
+				PreparedStatement ps = conn.prepareStatement("SELECT * FROM jobs WHERE application_last_date >= CURRENT_DATE ORDER BY jobs_id DESC LIMIT ?");
 				ps.setInt(1, limit);
 				ResultSet rs = ps.executeQuery();
 				while (rs.next()) {

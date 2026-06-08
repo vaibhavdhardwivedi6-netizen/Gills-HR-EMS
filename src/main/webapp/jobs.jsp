@@ -344,4 +344,4 @@
         .upload-zone:hover { background-color: rgba(var(--bs-primary-rgb), 0.05) !important; border-color: var(--bs-primary) !important; }
     </style>
 </body>
-</html>
+</html>
