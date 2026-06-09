@@ -156,15 +156,11 @@ import db.DatabaseConnection;
 		    
 		     List<jobs> list = new ArrayList<>();
 
-		    	  
-		    	    
-	    	 Connection conn = getConnection();
-
 	    	 try {
+	    	 	Connection conn = getConnection();
 				
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM jobs WHERE application_last_date >= CURRENT_DATE");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM jobs ORDER BY jobs_id DESC");
 					
-
 		    ResultSet rs = ps.executeQuery();
 
 	  	    while (rs.next()) {
@@ -181,6 +177,53 @@ import db.DatabaseConnection;
 		    	        
 	  	    	job.setJobLocation(rs.getString("job_location"));
 		    	
+	  	    	job.setQualification(rs.getString("qualification"));
+		    	
+	  	    	job.setExperience(rs.getString("experience"));
+		    	
+	  	    	job.setSalary(rs.getString("salary"));
+
+	  	    	job.setApplicationStartDate(rs.getDate("application_start_date") != null ? rs.getDate("application_start_date").toString() : "");
+		    	
+	  	    	job.setApplicationLastDate(rs.getDate("application_last_date") != null ? rs.getDate("application_last_date").toString() : "");
+
+	  	    	list.add(job);
+	  	    }
+		    
+	    	 } catch(Exception e) {
+			
+	    		 e.printStackTrace();
+			
+	    	 }
+	    	 
+	    	 return list;
+		     }
+
+		     // Active jobs only (for non-admin users — respects application deadline)
+		     public List<jobs> getAllActiveJobs()  {
+		    
+		     List<jobs> list = new ArrayList<>();
+
+	    	 try {
+	    	 	Connection conn = getConnection();
+				
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM jobs WHERE application_last_date >= CURRENT_DATE ORDER BY jobs_id DESC");
+					
+		    ResultSet rs = ps.executeQuery();
+
+	  	    while (rs.next()) {
+	
+	  	    	jobs job = new jobs();
+		    	
+	  	    	job.setJobId(rs.getInt("jobs_id"));
+		    	
+	  	    	job.setCompanyName(rs.getString("company_name"));
+		    	
+	  	    	job.setJobTitle(rs.getString("job_title"));
+		    	
+	  	    	job.setVacancies(rs.getInt("vacancies"));
+		    	        
+	  	    	job.setJobLocation(rs.getString("job_location"));
 		    	
 	  	    	job.setQualification(rs.getString("qualification"));
 		    	
@@ -188,26 +231,20 @@ import db.DatabaseConnection;
 		    	
 	  	    	job.setSalary(rs.getString("salary"));
 
-		    	
 	  	    	job.setApplicationStartDate(rs.getDate("application_start_date") != null ? rs.getDate("application_start_date").toString() : "");
 		    	
 	  	    	job.setApplicationLastDate(rs.getDate("application_last_date") != null ? rs.getDate("application_last_date").toString() : "");
 
-		    	
 	  	    	list.add(job);
-		    	    
-		        
 	  	    }
 		    
-	    	 } catch(SQLException e) {
+	    	 } catch(Exception e) {
 			
 	    		 e.printStackTrace();
 			
 	    	 }
 	    	 
-		 
 	    	 return list;
-		     
 		     }
 		     
 		     public jobs getJobById(int id) {

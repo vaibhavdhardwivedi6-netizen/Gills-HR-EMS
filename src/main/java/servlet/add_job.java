@@ -21,7 +21,14 @@ public class add_job extends HttpServlet {
 
         jobdao dao = new jobdao();
 
-        List<jobs> list = dao.getAllJobs();
+        // Admin sees ALL jobs; regular users see only active (non-expired) jobs
+        model.User loginUser = (model.User) request.getSession().getAttribute("userobj");
+        List<jobs> list;
+        if (loginUser != null && "admin".equals(loginUser.getRole())) {
+            list = dao.getAllJobs();
+        } else {
+            list = dao.getAllActiveJobs();
+        }
 
         request.setAttribute("jobList", list);
 
