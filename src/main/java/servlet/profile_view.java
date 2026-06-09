@@ -12,39 +12,35 @@ import java.io.IOException;
 
 import empdao.employeedao;
 
-
 @WebServlet("/view")
 public class profile_view extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    
+
+    private static final long serialVersionUID = 1L;
+
     public profile_view() {
         super();
     }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
-	    int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
 
-	    employeedao dao = new employeedao();
-	    employee emp = dao.getEmployeeById(id);
-	    
-	    System.out.println("ID: " + id);
-	    System.out.println("Employee: " + emp);
-	    
-	    request.setAttribute("emp", emp);
+        employeedao dao = new employeedao();
+        employee emp = dao.getEmployeeById(id);
 
-	    RequestDispatcher rd = request.getRequestDispatcher("profile.jsp");
-	    
-	    rd.forward(request, response);
-	    
-	    
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("ID: " + id);
+        System.out.println("Employee: " + emp);
 
-	}
+        request.setAttribute("emp", emp);
+
+        RequestDispatcher rd = request.getRequestDispatcher("employee_view.jsp");
+
+        rd.forward(request, response);
+
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
 
 }
